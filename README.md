@@ -6,5 +6,5 @@ The "minecraft" script needs to be saved in /etc/init.d/ with permissions set to
 
 Depends on tmux  
 install with  
-    sudo apt-get install tmux
+    sudo apt-get install tmux  
 
