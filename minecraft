@@ -60,7 +60,7 @@ mc_stop() {
         then
                 echo "$SERVICE is running... stopping."
               ## Add a line for each task for each Minecraft server you're controlling
-              as_user "screen -p 0 -S survival-mc -X eval 'stuff \"say SERVER SHUTTING DOWN IN 10 SECONDS. Saving map...\"\015'"
+              as_user "tmux send -t minemux 'say SERVER SHUTTING DOWN IN 10 SECONDS! ' C-m ; sleep 10 seconds ; tmux send -t minemux 'stop' C-m"
                 # as_user "screen -p 0 -S creative-mc -X eval 'stuff \"say SERVER SHUTTING DOWN IN 10 SECONDS. Saving map...\"\015'"
                 as_user "screen -p 0 -S survival-mc -X eval 'stuff \"save-all\"\015'"
                 # as_user "screen -p 0 -S creative-mc -X eval 'stuff \"save-all\"\015'"
@@ -94,7 +94,7 @@ case "$1" in
   status)
     if ps ax | grep -v grep | grep -v -i minemux | grep $SERVICE > /dev/null
     then
-      echo "$SERVICE is running."
+
     else
       echo "$SERVICE is not running."
     fi
